@@ -29,8 +29,8 @@ if not SECRET_KEY:
     raise RuntimeError("DJANGO_SECRET_KEY is not set")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
-DEBUG = True
+DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
+
 
 
 # add allowed hosts. The port can be omitted
@@ -137,7 +137,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
