@@ -22,6 +22,13 @@ jobs:
           script: |
             set -e
             cd /var/www/KanMind_Backend
+            
+            mkdir -p ~/.ssh
+            chmod 700 ~/.ssh
+            ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+            ssh-keyscan -H ssh.github.com >> ~/.ssh/known_hosts
+            chmod 600 ~/.ssh/known_hosts
+            
             git pull origin main
             source venv/bin/activate
             pip install -r requirements.txt
