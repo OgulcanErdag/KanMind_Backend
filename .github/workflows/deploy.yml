@@ -1,0 +1,29 @@
+name: Deploy KanMind Backend
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.KANMIND_SSH_HOST }}
+          username: ${{ secrets.KANMIND_SSH_USER }}
+          key: ${{ secrets.KANMIND_SSH_KEY }}
+          script: |
+            set -e
+            cd /var/www/KanMind_Backend
+            git pull origin main
+            source venv/bin/activate
+            pip install -r requirements.txt
+            python manage.py migrate --noinput
+            python manage.py collectstatic --noinput
+            sudo systemctl restart kanmind
