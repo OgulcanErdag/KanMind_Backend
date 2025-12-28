@@ -18,6 +18,7 @@ jobs:
           host: ${{ secrets.KANMIND_SSH_HOST }}
           username: ${{ secrets.KANMIND_SSH_USER }}
           key: ${{ secrets.KANMIND_SSH_KEY }}
+          known_hosts: ${{ secrets.KANMIND_KNOWN_HOSTS }}
           script: |
             set -e
             cd /var/www/KanMind_Backend
