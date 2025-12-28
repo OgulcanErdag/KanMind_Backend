@@ -22,7 +22,7 @@ jobs:
           script: |
             set -e
             cd /var/www/KanMind_Backend
-            
+            git config --global --add safe.directory /var/www/KanMind_Backend
             mkdir -p ~/.ssh
             chmod 700 ~/.ssh
             ssh-keyscan -H github.com >> ~/.ssh/known_hosts
